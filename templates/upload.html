@@ -1,0 +1,41 @@
+<!doctype html>
+<title>Python Flask File Upload Example</title>
+
+{% if filename %}
+	<div>z
+		<img src="{{ url_for('display_image', filename=filename) }}">
+	</div>
+{% endif %}
+
+<h3> Enter Your Two Meme Texts </h3>
+<form id="memetext" method="POST" action="/textUpload" target="hiddenFrame">
+    <input name="Memetext1">
+    <input name="Memetext2">
+    <input type="submit">
+</form>
+
+<iframe name="hiddenFrame" class="hide"></iframe>
+
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+<form method="post" action="/imageUpload" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>
+
